@@ -1,6 +1,6 @@
 export default class BookStoreSevices {
 
-  getBook () {
+  getBooks () {
     return [];
   }
 }
