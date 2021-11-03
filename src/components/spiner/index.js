@@ -5,7 +5,7 @@ import s from './style.module.css'
 const Spiner = () => {
 
   return (
-    <div>Error!</div>
+    <div>...Loading</div>
   )
 }
 
