@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import s from './style.module.css'
+
 import BookListItem from '../book-list-item'
 import withBookstoreSrvice from '../hoc/with-boostore-service'
 import { booksLoaded } from '../../ations'
@@ -32,6 +34,10 @@ import { connect } from "react-redux";
 //     }
 // }
 
+// const total = [0, 1, 2, 3].reduceRight(function (a, b) {
+//   return a + b;
+// }
+
 const BookList = ({ books, bookstoreService, booksLoaded }) => {
 
   useEffect(() => {
@@ -39,8 +45,9 @@ const BookList = ({ books, bookstoreService, booksLoaded }) => {
     booksLoaded(data)
   }, [bookstoreService, booksLoaded])
 
+
   return (
-    <ul>
+    <ul className={s.bookList}>
       {
         books.map((book) => {
           return (

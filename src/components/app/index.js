@@ -5,18 +5,21 @@ import { Route, Switch } from 'react-router-dom'
 
 import HomePage from '../pages/home-page'
 import CardPage from '../pages/card-page'
+import Header from "../header";
+import ShopCartTable from "../shop-cart";
 
 
 const App = () => {
 
   return (
-    <div className={s.app}>
+    <main role='main' className={s.container}>
+      <Header numItems={5} total={210}/>
       <Switch>
         <Route path='/' exact component={HomePage} />
         <Route path='/card' component={CardPage} />
       </Switch>
-      
-    </div>
+      <ShopCartTable />
+    </main>
   )
 }
 
