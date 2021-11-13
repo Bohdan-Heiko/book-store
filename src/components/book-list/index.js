@@ -13,18 +13,13 @@ import { connect } from "react-redux";
 
 const BookList = (props) => {
 
-  const { loading, books, error,
-          bookstoreService, booksLoaded,
-          booksRequested, booksError } = props
+  const { loading, books, error, fetchDataBooks } = props
 
   console.log(props);
   useEffect(() => {
-    booksRequested()
-    bookstoreService.getBooks()
-      .then((data) => booksLoaded(data))
-      .catch((err) => booksError(err))
+    fetchDataBooks()
 
-  }, [bookstoreService, booksLoaded, booksRequested, booksError])
+  }, [fetchDataBooks])
 
   if (error) {
     return <ErrorIndicator />
@@ -51,10 +46,20 @@ const mapStateToProps = ({books, loading, error}) => {
 }
 
 
-const mapDispatchToProps = {
-  booksLoaded,
-  booksRequested,
-  booksError
+const mapDispatchToProps = (dispatch, ownProperty) => {
+    const {bookstoreService} = ownProperty
+  return {
+    fetchDataBooks: () => {
+      dispatch(booksRequested())
+      bookstoreService.getBooks()
+        .then((data) => dispatch(booksLoaded(data)))
+        .catch((err) => dispatch(booksError(err)))
+    }
+    
+  }
+  // booksLoaded,
+  // booksRequested,
+  // booksError
 }
 
 export default withBookstoreSrvice()(connect(mapStateToProps, mapDispatchToProps)(BookList))
