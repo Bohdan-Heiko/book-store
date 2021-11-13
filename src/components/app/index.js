@@ -16,7 +16,7 @@ const App = () => {
       <Header numItems={5} total={210}/>
       <Switch>
         <Route path='/' exact component={HomePage} />
-        <Route path='/card' component={CardPage} />
+        <Route path='/cart' component={CardPage} />
       </Switch>
       <ShopCartTable />
     </main>

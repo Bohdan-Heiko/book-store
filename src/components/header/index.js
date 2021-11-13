@@ -1,14 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 const Header = ({ numItems, total }) => {
   return (
     <header className="shop-header">
-      <a className="logo text-dark" href="#">ReStore</a>
-      <a className="shopping-cart">
+      <Link to="/"> 
+      <div className="logo text-dark">ReStore</div>
+      </Link>
+      <Link to="/cart"> 
+      <div className="shopping-cart">
         <i className="bi bi-basket" />
         {numItems} items {total}
-      </a>
+      </div>
+      </Link>
     </header>
   );
 };
