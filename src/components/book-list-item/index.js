@@ -1,7 +1,7 @@
 import React from "react";
 import s from './style.module.css'
 
-const BookListItem = ({book}) => {
+const   BookListItem = ({book}) => {
  const {title, author, price, coverImage} = book
   return (
     <>
