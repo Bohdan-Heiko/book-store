@@ -4,7 +4,7 @@ import BookList from '../book-list'
 import Spiner from '../spiner'
 import ErrorIndicator from '../error-indicator'
 import withBookstoreSrvice from '../hoc/with-boostore-service'
-import { fetchDataBooks } from '../../ations'
+import { fetchDataBooks, bookAddedToCart } from '../../ations'
 
 import { connect } from "react-redux";
 
@@ -12,9 +12,9 @@ import { connect } from "react-redux";
 
 const BookListContainer = (props) => {
 
-  const { loading, books, error, fetchDataBooks } = props
+  const { loading, books, error, fetchDataBooks, onAddedToCart } = props
 
-  console.log(props);
+  
   useEffect(() => {
     fetchDataBooks()
 
@@ -29,7 +29,7 @@ const BookListContainer = (props) => {
   }
 
   return (
-   <BookList books={books} />
+    <BookList books={books} onAddedToCart={onAddedToCart}/>
 
   )
 }
@@ -42,7 +42,8 @@ const mapStateToProps = ({books, loading, error}) => {
 
 const mapDispatchToProps = (dispatch, { bookstoreService }) => {
   return {
-    fetchDataBooks: fetchDataBooks(dispatch, bookstoreService)
+    fetchDataBooks: fetchDataBooks(dispatch, bookstoreService),
+    onAddedToCart: (id) => dispatch(bookAddedToCart(id))
   }
 }
 
