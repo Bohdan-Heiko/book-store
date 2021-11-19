@@ -52,9 +52,9 @@ const ShopCartTable = ({items, total, onIncrement, onDecrement, onDelete}) => {
         </tbody>
       </table>
 
-      <div className="total">
+      {/* <div className="total">
         Total: {total}
-      </div>
+      </div> */}
     </div>
   );
 };

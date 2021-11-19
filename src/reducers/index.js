@@ -1,14 +1,13 @@
-
 const initialState = {
   books: [],
   loading: true,
   error: null,
   cartItems: [],
-  orderTotal: 220
+  orderTotal: 0
 }
 
-const updateCartItems = (cartItems, item, idx) => {
 
+const updateCartItems = (cartItems, item, idx) => {
   if (item.count === 0) {
     return [
       ...cartItems.slice(0, idx),
@@ -44,27 +43,27 @@ const updateCartItem = (book, item = {}, quantity) => {
     count: count + quantity,
     total: total + quantity * book.price
   }
-  
 }
 
 const updateOrder = (state, bookId, quantity) => {
-  const{books, cartItems} = state
-
+  const { books, cartItems } = state
+ 
   const book = books.find(({ id }) => id === bookId)
   const indexItem = cartItems.findIndex(({ id }) => id === bookId)
   const item = cartItems[indexItem]
-
   const newItem = updateCartItem(book, item, quantity)
+
+
+  console.log(book);
   return {
     ...state,
-    cartItems: updateCartItems(cartItems, newItem, indexItem)
+    cartItems: updateCartItems(cartItems, newItem, indexItem),
   }
 }
 
 const reducer = (state = initialState, action) => {
  
   switch (action.type) {
-
     case 'FETCH_BOOKS_SUCCESS':
       return {
         ...state,
@@ -92,15 +91,12 @@ const reducer = (state = initialState, action) => {
     case 'BOOK_REMOVE_FROM_CART':
       return updateOrder(state, action.payload, -1)
 
-
     case 'ALL_BOOK_REMOVE_FROM_CART':
       const item = state.cartItems.find(({ id }) => id === action.payload)
       return updateOrder(state, action.payload, -item.count)
        
     default: return state
-  }
-
-  
+  }  
 }
 
 export default reducer;
